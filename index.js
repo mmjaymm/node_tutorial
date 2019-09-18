@@ -1,8 +1,14 @@
 const express = require('express');
 const routes = require('./routes/api');
 const body_parser = require('body-parser');
+const mongoose = require('mongoose');
 
+// set up express app
 const app = express();
+
+// connect to mongodb
+mongoose.connect('mongodb://localhost/fdtp_system');
+mongoose.Promise = global.Promise;
 
 app.use(body_parser.json());
 

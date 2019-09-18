@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const System = require('../models/systems');
 
 router.get('/systems', function (request, response) {
     response.send({
@@ -9,11 +10,15 @@ router.get('/systems', function (request, response) {
 
 // add new system to db
 router.post('/systems', function (request, response) {
-    console.log(request.body);
+    var system = new System(request.body);
+    system.save();
+
+    System.create(request.body);
+
     response.send({
         type: 'POST',
-        name: request.body.name,
-        rank: request.body.rank
+        name: system.name,
+        rank: system.rank
     })
 });
 
